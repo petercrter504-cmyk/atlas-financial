@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Financial</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #101b2d;
+  --navy-light: #1b2b45;
+  --blue: #3978f6;
+  --bg: #f3f5f9;
+  --white: #ffffff;
+  --text: #182338;
+  --muted: #8290a5;
+  --green: #20a675;
+  --red: #e45151;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.demo-notice {
+  background: #fff3d6;
+  color: #795400;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.app {
+  max-width: 500px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+header {
+  background: var(--navy);
+  color: white;
+  padding: 25px 22px 30px;
+  border-radius: 0 0 25px 25px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: var(--blue);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.profile {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #344866;
+  display: grid;
+  place-items: center;
+}
+
+.welcome {
+  margin-top: 30px;
+  color: #b9c5d6;
+  font-size: 14px;
+}
+
+.balance-label {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #b9c5d6;
+}
+
+.balance {
+  margin-top: 8px;
+  font-size: 36px;
+  font-weight: 750;
+  letter-spacing: -1px;
+}
+
+.account-info {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #b9c5d6;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 25px 18px;
+}
+
+.action {
+  text-align: center;
+}
+
+.action button {
+  border: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 19px;
+  color: white;
+  background: var(--blue);
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.action span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 3px 15px rgba(20, 40, 70, 0.04);
+}
+
+.card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.card-heading h2 {
+  font-size: 17px;
+}
+
+.card-heading button {
+  border: none;
+  background: transparent;
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.account-row:last-child {
+  border-bottom: none;
+}
+
+.account-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 14px;
+  background: #edf3ff;
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.account-title {
+  font-weight: 650;
+  font-size: 14px;
+}
+
+.account-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.account-amount {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f0f3f8;
+  display: grid;
+  place-items: center;
+}
+
+.transaction-name {
+  font-weight: 650;
+  font-size: 14px;
+}
+
+.transaction-date {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.transaction-amount {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.negative {
+  color: var(--text);
+}
+
+.positive {
+  color: var(--green);
+}
+
+.empty {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  height: 75px;
+  background: white;
+  border-top: 1px solid #e7ebf1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 10;
+}
+
+.nav-item {
+  border: none;
+  background: white;
+  color: #8995a8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11px;
+}
+
+.nav-item .nav-icon {
+  font-size: 21px;
+}
+
+.nav-item.active {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 35, 0.55);
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.modal-bg.show {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-top h2 {
+  font-size: 21px;
+}
+
+.close {
+  border: none;
+  background: #f0f2f5;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  margin: 16px 0 7px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #dce2ea;
+  border-radius: 12px;
+  padding: 14px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+
+.input:focus {
+  border-color: var(--blue);
+}
+
+.primary {
+  width: 100%;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.secondary {
+  width: 100%;
+  background: #edf2fa;
+  color: var(--text);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 10px;
+}
+
+.disclosure {
+  background: #fff3d6;
+  color: #795400;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 15px;
+}
+
+.success {
+  text-align: center;
+  padding: 20px 5px;
+}
+
+.success-icon {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.success h2 {
+  margin-bottom: 10px;
+}
+
+.success p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.profile-row {
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.profile-row strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.profile-row span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (min-width: 600px) {
+  header {
+    border-radius: 0 0 30px 30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="demo-notice">
+  FICTIONAL BANKING SIMULATOR — NO REAL MONEY
+</div>
+
+<div class="app">
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div class="brand-name">Atlas Financial</div>
+    </div>
+    <div class="profile">👤</div>
+  </div>
+
+  <div class="welcome">Welcome back</div>
+
+  <div class="balance-label">Simulated total balance</div>
+  <div class="balance" id="balance">$1,000,000.00</div>
+
+  <div class="account-info">
+    Simulation account ·· 4829
+  </div>
+</header>
+
+<div class="actions">
+
+  <div class="action">
+    <button onclick="openTransfer()">↗</button>
+    <span>Transfer</span>
+  </div>
+
+  <div class="action">
+    <button onclick="showActivity()">▤</button>
+    <span>Activity</span>
+  </div>
+
+  <div class="action">
+    <button onclick="showAccounts()">▣</button>
+    <span>Accounts</span>
+  </div>
+
+  <div class="action">
+    <button onclick="showProfile()">👤</button>
+    <span>Profile</span>
+  </div>
+
+</div>
+
+<div id="main-content">
+
+  <div class="card">
+    <div class="card-heading">
+      <h2>Your accounts</h2>
+    </div>
+
+    <div class="account-row">
+      <div class="account-left">
+        <div class="account-icon">▣</div>
+        <div>
+          <div class="account-title">Simulated checking</div>
+          <div class="account-sub">Account ·· 4829</div>
+        </div>
+      </div>
+      <div class="account-amount" id="accountBalance">
+        $1,000,000.00
+      </div>
+    </div>
+
+    <div class="account-row">
+      <div class="account-left">
+        <div class="account-icon">◈</div>
+        <div>
+          <div class="account-title">Simulated savings</div>
+          <div class="account-sub">Account ·· 0915</div>
+        </div>
+      </div>
+      <div class="account-amount">$0.00</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-heading">
+      <h2>Recent activity</h2>
+      <button onclick="showActivity()">See all</button>
+    </div>
+
+    <div id="transactions">
+      <div class="empty">No transactions yet</div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="showHome(this)">
+    <span class="nav-icon">⌂</span>
+    Home
+  </button>
+
+  <button class="nav-item" onclick="openTransfer()">
+    <span class="nav-icon">↗</span>
+    Transfer
+  </button>
+
+  <button class="nav-item" onclick="showActivity(this)">
+    <span class="nav-icon">▤</span>
+    Activity
+  </button>
+
+  <button class="nav-item" onclick="showProfile(this)">
+    <span class="nav-icon">♙</span>
+    Profile
+  </button>
+</nav>
+
+<!-- TRANSFER MODAL -->
+
+<div class="modal-bg" id="transferModal">
+  <div class="modal">
+
+    <div class="modal-top">
+      <h2>Simulated transfer</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="disclosure">
+      This is a fictional simulation. Transfers only change
+      the balance displayed in this app. No money is sent.
+    </div>
+
+    <label class="form-label">Recipient name</label>
+    <input class="input" id="recipient" placeholder="Enter recipient name">
+
+    <label class="form-label">Recipient reference</label>
+    <input class="input" id="recipientAccount"
+           placeholder="Demo account or reference">
+
+    <label class="form-label">Amount (USD)</label>
+    <input class="input" id="amount" type="number"
+           min="0.01" step="0.01" placeholder="0.00">
+
+    <label class="form-label">Memo (optional)</label>
+    <input class="input" id="memo" placeholder="Payment description">
+
+    <button class="primary" onclick="submitTransfer()">
+      Review simulated transfer
+    </button>
+
+    <button class="secondary" onclick="closeModal()">
+      Cancel
+    </button>
+
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+
+<div class="modal-bg" id="confirmModal">
+  <div class="modal">
+
+    <div class="modal-top">
+      <h2>Review transfer</h2>
+      <button class="close" onclick="closeConfirm()">×</button>
+    </div>
+
+    <div id="confirmationDetails"></div>
+
+    <div class="disclosure">
+      SIMULATION ONLY — Confirming this action does not send money
+      to any bank, account, or person.
+    </div>
+
+    <button class="primary" onclick="confirmTransfer()">
+      Confirm simulated transfer
+    </button>
+
+    <button class="secondary" onclick="closeConfirm()">
+      Go back
+    </button>
+
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+
+<div class="modal-bg" id="successModal">
+  <div class="modal">
+
+    <div class="success">
+      <div class="success-icon">✓</div>
+      <h2>Simulation complete</h2>
+      <p id="successMessage"></p>
+      <button class="primary" onclick="closeSuccess()">
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+const STARTING_BALANCE = 1000000;
+
+let balance = Number(
+  localStorage.getItem("atlas_balance")
+);
+
+if (!Number.isFinite(balance)) {
+  balance = STARTING_BALANCE;
+}
+
+let transactions = JSON.parse(
+  localStorage.getItem("atlas_transactions") || "[]"
+);
+
+let pendingTransfer = null;
+
+function money(value) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD"
+  }).format(value);
+}
+
+function saveData() {
+  localStorage.setItem("atlas_balance", balance);
+  localStorage.setItem(
+    "atlas_transactions",
+    JSON.stringify(transactions)
+  );
+}
+
+function updateDashboard() {
+  document.getElementById("balance").textContent =
+    money(balance);
+
+  document.getElementById("accountBalance").textContent =
+    money(balance);
+
+  renderTransactions();
+}
+
+function renderTransactions() {
+  const container = document.getElementById("transactions");
+
+  if (transactions.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No transactions yet</div>';
+    return;
+  }
+
+  container.innerHTML = transactions
+    .slice(0, 5)
+    .map(transaction => `
+      <div class="transaction">
+        <div class="transaction-left">
+          <div class="transaction-icon">↗</div>
+          <div>
+            <div class="transaction-name">
+              ${escapeHTML(transaction.name)}
+            </div>
+            <div class="transaction-date">
+              ${transaction.date}
+            </div>
+          </div>
+        </div>
+
+        <div class="transaction-amount negative">
+          -${money(transaction.amount)}
+        </div>
+      </div>
+    `)
+    .join("");
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+
+    return entities[character];
+  });
+}
+
+function openTransfer() {
+  document.getElementById("transferModal")
+    .classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("transferModal")
+    .classList.remove("show");
+}
+
+function closeConfirm() {
+  document.getElementById("confirmModal")
+    .classList.remove("show");
+}
+
+function submitTransfer() {
+  const recipient = document.getElementById("recipient")
+    .value.trim();
+
+  const recipientAccount =
+    document.getElementById("recipientAccount")
+      .value.trim();
+
+  const amount = Number(
+    document.getElementById("amount").value
+  );
+
+  const memo = document.getElementById("memo")
+    .value.trim();
+
+  if (!recipient || !recipientAccount) {
+    alert("Please enter the recipient and reference.");
+    return;
+  }
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    alert("Enter a valid amount.");
+    return;
+  }
+
+  if (amount > balance) {
+    alert("Insufficient simulated balance.");
+    return;
+  }
+
+  pendingTransfer = {
+    name: recipient,
+    account: recipientAccount,
+    amount: amount,
+    memo: memo
+  };
+
+  document.getElementById("confirmationDetails")
+    .innerHTML = `
+      <div class="profile-row">
+        <strong>Recipient</strong>
+        <span>${escapeHTML(recipient)}</span>
+      </div>
+
+      <div class="profile-row">
+        <strong>Demo reference</strong>
+        <span>${escapeHTML(recipientAccount)}</span>
+      </div>
+
+      <div class="profile-row">
+        <strong>Amount</strong>
+        <span>${money(amount)}</span>
+      </div>
+
+      <div class="profile-row">
+        <strong>Remaining simulated balance</strong>
+        <span>${money(balance - amount)}</span>
+      </div>
+
+      <div class="profile-row">
+        <strong>Memo</strong>
+        <span>${escapeHTML(memo || "None")}</span>
+      </div>
+    `;
+
+  closeModal();
+
+  document.getElementById("confirmModal")
+    .classList.add("show");
+}
+
+function confirmTransfer() {
+  if (!pendingTransfer) return;
+
+  balance -= pendingTransfer.amount;
+
+  transactions.unshift({
+    name: pendingTransfer.name,
+    account: pendingTransfer.account,
+    amount: pendingTransfer.amount,
+    memo: pendingTransfer.memo,
+    date: new Date().toLocaleString(),
+    id: "SIM-" + Date.now()
+  });
+
+  saveData();
+  updateDashboard();
+
+  document.getElementById("confirmModal")
+    .classList.remove("show");
+
+  document.getElementById("successMessage")
+    .textContent =
+    `${money(pendingTransfer.amount)} was deducted from your simulated balance. No real transfer occurred.`;
+
+  document.getElementById("successModal")
+    .classList.add("show");
+
+  pendingTransfer = null;
+
+  document.getElementById("recipient").value = "";
+  document.getElementById("recipientAccount").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("memo").value = "";
+}
+
+function closeSuccess() {
+  document.getElementById("successModal")
+    .classList.remove("show");
+}
+
+function setActive(button) {
+  document.querySelectorAll(".nav-item")
+    .forEach(item => item.classList.remove("active"));
+
+  if (button) button.classList.add("active");
+}
+
+function showHome(button) {
+  setActive(button);
+
+  document.getElementById("main-content")
+    .innerHTML = `
+      <div class="card">
+        <div class="card-heading">
+          <h2>Your accounts</h2>
+        </div>
+
+        <div class="account-row">
+          <div class="account-left">
+            <div class="account-icon">▣</div>
+            <div>
+              <div class="account-title">
+                Simulated checking
+              </div>
+              <div class="account-sub">
+                Account ·· 4829
+              </div>
+            </div>
+          </div>
+
+          <div class="account-amount">
+            ${money(balance)}
+          </div>
+        </div>
+
+        <div class="account-row">
+          <div class="account-left">
+            <div class="account-icon">◈</div>
+            <div>
+              <div class="account-title">
+                Simulated savings
+              </div>
+              <div class="account-sub">
+                Account ·· 0915
+              </div>
+            </div>
+          </div>
+
+          <div class="account-amount">$0.00</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-heading">
+          <h2>Recent activity</h2>
+          <button onclick="showActivity()">
+            See all
+          </button>
+        </div>
+
+        <div id="transactions">
+          ${transactionHTML()}
+        </div>
+      </div>
+    `;
+}
+
+function transactionHTML() {
+  if (!transactions.length) {
+    return '<div class="empty">No transactions yet</div>';
+  }
+
+  return transactions.slice(0, 5).map(transaction => `
+    <div class="transaction">
+      <div class="transaction-left">
+        <div class="transaction-icon">↗</div>
+        <div>
+          <div class="transaction-name">
+            ${escapeHTML(transaction.name)}
+          </div>
+          <div class="transaction-date">
+            ${transaction.date}
+          </div>
+        </div>
+      </div>
+
+      <div class="transaction-amount negative">
+        -${money(transaction.amount)}
+      </div>
+    </div>
+  `).join("");
+}
+
+function showActivity(button) {
+  setActive(button);
+
+  document.getElementById("main-content")
+    .innerHTML = `
+      <div class="card">
+        <div class="card-heading">
+          <h2>Transaction history</h2>
+        </div>
+
+        <div class="disclosure">
+          All transactions shown are simulated and stored
+          locally on this device.
+        </div>
+
+        <div style="margin-top:15px">
+          ${transactionHTML()}
+        </div>
+      </div>
+    `;
+}
+
+function showAccounts(button) {
+  setActive(button);
+
+  document.getElementById("main-content")
+    .innerHTML = `
+      <div class="card">
+        <div class="card-heading">
+          <h2>Accounts</h2>
+        </div>
+
+        <div class="account-row">
+          <div class="account-left">
+            <div class="account-icon">▣</div>
+            <div>
+              <div class="account-title">
+                Simulated checking
+              </div>
+              <div class="account-sub">
+                Account ·· 4829
+              </div>
+            </div>
+          </div>
+
+          <div class="account-amount">
+            ${money(balance)}
+          </div>
+        </div>
+
+        <div class="account-row">
+          <div class="account-left">
+            <div class="account-icon">◈</div>
+            <div>
+              <div class="account-title">
+                Simulated savings
+              </div>
+              <div class="account-sub">
+                Account ·· 0915
+              </div>
+            </div>
+          </div>
+
+          <div class="account-amount">$0.00</div>
+        </div>
+      </div>
+    `;
+}
+
+function showProfile(button) {
+  setActive(button);
+
+  document.getElementById("main-content")
+    .innerHTML = `
+      <div class="card">
+        <div class="card-heading">
+          <h2>Profile</h2>
+        </div>
+
+        <div class="profile-row">
+          <strong>Application</strong>
+          <span>Atlas Financial Simulator</span>
+        </div>
+
+        <div class="profile-row">
+          <strong>Account type</strong>
+          <span>Fictional test account</span>
+        </div>
+
+        <div class="profile-row">
+          <strong>Currency</strong>
+          <span>USD</span>
+        </div>
+
+        <div class="profile-row">
+          <strong>Starting balance</strong>
+          <span>${money(STARTING_BALANCE)}</span>
+        </div>
+
+        <div class="profile-row">
+          <strong>Data storage</strong>
+          <span>Local device browser</span>
+        </div>
+
+        <div class="disclosure">
+          This application does not connect to any bank
+          or payment network. No funds are real.
+        </div>
+
+        <button class="secondary"
+          onclick="resetSimulation()">
+          Reset simulation
+        </button>
+      </div>
+    `;
+}
+
+function resetSimulation() {
+  if (!confirm(
+    "Reset the simulator to its original balance and clear its transactions?"
+  )) return;
+
+  balance = STARTING_BALANCE;
+  transactions = [];
+
+  saveData();
+  updateDashboard();
+  showHome();
+
+  alert("Simulation reset.");
+}
+
+updateDashboard();
+
+</script>
+</body>
+</html>
